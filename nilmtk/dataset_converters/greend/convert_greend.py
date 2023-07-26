@@ -41,10 +41,13 @@ def _get_blocks(filename):
         block_data.seek(0)
         try:
             # ignore extra fields for some files
-            error_bad_lines = not (
-                ('building5' in filename and 'dataset_2014-02-04.csv' in filename)
-            )
-            df = pd.read_csv(block_data, index_col='timestamp', dtype=dtypes, error_bad_lines=error_bad_lines)
+            if pd.__version__ >= '1.3.0':
+                df = pd.read_csv(block_data, index_col='timestamp', dtype=dtypes, on_bad_lines='skip')
+            else:
+                error_bad_lines = not (
+                    ('building5' in filename and 'dataset_2014-02-04.csv' in filename)
+                )
+                df = pd.read_csv(block_data, index_col='timestamp', dtype=dtypes, error_bad_lines=error_bad_lines)
         except: #(pd.errors.ParserError, ValueError, TypeError):
             print("ERROR", filename)
             raise

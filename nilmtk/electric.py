@@ -293,7 +293,7 @@ class Electric(object):
 
         other_ac_types = other_total_energy.keys()
         self_ac_types = total_energy.keys()
-        shared_ac_types = set(other_ac_types).intersection(self_ac_types)
+        shared_ac_types = list(set(other_ac_types).intersection(self_ac_types))
         n_shared_ac_types = len(shared_ac_types)
         if n_shared_ac_types > 1:
             return (total_energy[shared_ac_types] / 
@@ -304,7 +304,7 @@ class Electric(object):
             warn("No shared AC types.  Using '{:s}' for submeter"
                  " and '{:s}' for other.".format(ac_type, other_ac_type))
         elif n_shared_ac_types == 1:
-            ac_type = list(shared_ac_types)[0]
+            ac_type = shared_ac_types[0]
             other_ac_type = ac_type
         return total_energy[ac_type] / other_total_energy[other_ac_type]
 

@@ -717,9 +717,14 @@ class MeterGroup(Electric):
             kwargs['sections'] = [section]
             start = normalise_timestamp(section.start, freq)
             tz = None if start.tz is None else start.tz.zone
-            index = pd.date_range(
-                start.tz_localize(None), section.end.tz_localize(None), tz=tz,
-                closed='left', freq=freq)
+            if pd.__version__ >= '1.4.0':
+                index = pd.date_range(
+                    start.tz_localize(None), section.end.tz_localize(None), tz=tz,
+                    inclusive='left', freq=freq)
+            else:
+                index = pd.date_range(
+                    start.tz_localize(None), section.end.tz_localize(None), tz=tz,
+                    closed='left', freq=freq)
             chunk = combine_chunks_from_generators(
                 index, columns, self.meters, kwargs)
             yield chunk
