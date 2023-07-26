@@ -1,3 +1,4 @@
+import unittest
 import pandas as pd
 from datetime import timedelta
 from nilmtk.tests.testingtools import data_dir
@@ -23,7 +24,7 @@ def power_data(simple=True):
         STEP = 10
         data = [0,  0,  0, 100, 100, 100, 150,
                 150, 200,   0,   0, 100, 5000,    0]
-        secs = np.arange(start=0, stop=len(data) * STEP, step=STEP)
+        secs = np.arange(start=0, stop=len(data) * STEP, step=STEP, dtype=np.float64)
     else:
         data = [0,  0,  0, 100, 100, 100, 150,
                 150, 200,   0,   0, 100, 5000,    0]
@@ -84,7 +85,7 @@ MEASUREMENTS = [('power', 'active'), ('energy', 'reactive'), ('voltage', '')]
 
 
 def create_random_df():
-    N_PERIODS = 1E4
+    N_PERIODS = int(1E4)
     rng = pd.date_range('2012-01-01', freq='S', periods=N_PERIODS)
     data = np.random.randint(
         low=0, high=1000, size=(N_PERIODS, len(MEASUREMENTS)))
@@ -114,7 +115,7 @@ def add_building_metadata(store, elec_meters, key='building1', appliances=[]):
     node._f_setattr('metadata', md)
 
 
-def create_co_test_hdf5():
+def create_co_hdf5():
     FILENAME = join(data_dir(), 'co_test.h5')
     N_METERS = 3
     chunk = 1000
@@ -250,4 +251,13 @@ def create_all():
     create_energy_hdf5()
     create_energy_hdf5(simple=False)
     create_random_hdf5()
-    create_co_test_hdf5()
+    create_co_hdf5()
+
+
+def generate_h5_unit_test():
+    create_all()
+
+
+if __name__ == '__main__':
+    unittest.main()
+

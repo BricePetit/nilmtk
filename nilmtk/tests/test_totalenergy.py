@@ -1,10 +1,10 @@
 import unittest
-from ..totalenergy import TotalEnergy, _energy_for_power_series
-from ...preprocessing import Clip
-from ... import TimeFrame, ElecMeter, HDFDataStore
-from ...elecmeter import ElecMeterID
-from ...consts import JOULES_PER_KWH
-from ...tests.testingtools import data_dir
+from nilmtk.stats.totalenergy import TotalEnergy, _energy_for_power_series
+from nilmtk.preprocessing import Clip
+from nilmtk import TimeFrame, ElecMeter, HDFDataStore
+from nilmtk.elecmeter import ElecMeterID
+from nilmtk.consts import JOULES_PER_KWH
+from nilmtk.tests.testingtools import data_dir
 from os.path import join
 import numpy as np
 import pandas as pd
