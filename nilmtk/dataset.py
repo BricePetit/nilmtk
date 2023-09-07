@@ -27,7 +27,7 @@ class DataSet(object):
         See nilm-metadata.readthedocs.org/en/latest/dataset_metadata.html#dataset
     """
 
-    def __init__(self, filename=None, format='HDF'):
+    def __init__(self, filename=None, format='HDF', mode='r'):
         """
         Parameters
         ----------
@@ -37,12 +37,15 @@ class DataSet(object):
         format : str
             format of output. 'HDF', 'CSV' or None. Defaults to 'HDF'.
             Use None for automatic inference from file name extension.
+
+        mode : str
+            mode to open the store with.  See pandas.HDFStore for info.
         """
         self.store = None
         self.buildings = OrderedDict()
         self.metadata = {}
         if filename is not None:
-            self.import_metadata(get_datastore(filename, format))
+            self.import_metadata(get_datastore(filename, format, mode))
 
     def import_metadata(self, store):
         """
