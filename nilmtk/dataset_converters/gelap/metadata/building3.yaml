@@ -1,0 +1,81 @@
+instance: 3
+original_name: house_3   # original name from GeLaP dataset
+elec_meters:
+  1: &gelap_monitor
+    submeter_of: 0 
+    device_model: GeLaP_monitor
+  2: *gelap_monitor
+  3: *gelap_monitor
+  4: *gelap_monitor
+  5: *gelap_monitor
+  6: *gelap_monitor
+  7: *gelap_monitor
+  8: *gelap_monitor
+  9: *gelap_monitor
+  10: *gelap_monitor  
+  11: &gelap_whole_house 
+    site_meter: true
+    device_model: Gelap_whole_house
+
+appliances:
+- original_name: coffee machine
+  room: kitchen
+  type: coffee maker
+  instance: 1
+  meters: [1] 
+
+- original_name: bread slicer
+  room: kitchen
+  type: small resistive cooking appliance
+  instance: 1
+  meters: [2]
+
+- original_name: television
+  room: living room
+  type: television
+  instance: 1
+  meters: [3]
+
+- original_name: washing machine
+  room: housekeeping room
+  type: washing machine
+  instance: 1
+  meters: [4]
+
+- original_name: dryer
+  room: housekeeping room
+  type: washer dryer
+  instance: 1
+  meters: [5]
+
+- original_name: lamp
+  room: children's room
+  type: lamp
+  instance: 1
+  multiple: true
+  meters: [6]
+
+- original_name: bedside lamp
+  room: bedroom
+  type: lamp
+  instance: 2
+  multiple: true
+  meters: [7]
+
+- original_name: charger
+  room: kitchen
+  type: mobile phone charger
+  instance: 1
+  meters: [8]
+
+- original_name: LED lamp
+  room: kitchen
+  type: LED lamp
+  instance: 1
+  meters: [9]
+
+- original_name: stereo system
+  room: living room
+  type: audio system
+  instance: 1
+  meters: [10]
